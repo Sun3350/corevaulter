@@ -3,6 +3,7 @@ import { useAuthStore } from "../stores/auth.store";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export function LoginPage() {
   const { isAuthenticated } = useAuthStore();
@@ -41,11 +42,11 @@ export function LoginPage() {
           className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             Don&apos;t have an account?{" "}
-            <a
-              href="/register"
+            <Link
+              to="/register"
               className="font-medium text-[#D71E28] hover:text-red-700">
               Register here
-            </a>
+            </Link>
           </p>
         </motion.div>
       </motion.div>
