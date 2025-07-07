@@ -33,7 +33,7 @@ export function VaultBreakdown() {
                 dataKey="value"
                 nameKey="name"
                 label={({ name, percent }) =>
-                  `${name}: ${(percent * 100).toFixed(0)}%`
+                  `${name}: ${((percent ?? 0) * 100).toFixed(0)}%`
                 }>
                 {vaultData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />

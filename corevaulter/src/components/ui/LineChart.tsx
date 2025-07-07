@@ -10,7 +10,7 @@ import {
 } from "recharts";
 
 interface LineChartProps {
-  data: any[];
+  data: Record<string, unknown>[];
   lines: { dataKey: string; name: string; color: string }[];
   xAxisKey: string;
   height?: number;

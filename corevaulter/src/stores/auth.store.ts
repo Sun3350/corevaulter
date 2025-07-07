@@ -55,7 +55,7 @@ export const useAuthStore = create<AuthState>()(
             const user = await getCurrentUser(token);
             set({ user, token, isAuthenticated: true, isLoading: false });
           }
-        } catch (error) {
+        } catch {
           set({ isLoading: false });
         }
       },

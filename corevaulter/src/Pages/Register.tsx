@@ -1,4 +1,4 @@
-import { RegisterForm } from "../components/auth/RegisterForm";
+import { RegisterForm } from "../components/auth/registerForm";
 import { useAuthStore } from "../stores/auth.store";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";

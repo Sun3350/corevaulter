@@ -5,7 +5,15 @@ import { useAuthStore } from "../../stores/auth.store";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 
-const FadeIn = ({ children, delay = 0 }) => (
+import React from "react";
+
+const FadeIn = ({
+  children,
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+}) => (
   <motion.div
     initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
