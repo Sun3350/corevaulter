@@ -4,9 +4,9 @@
     "module": "commonjs",
     "target": "ES6",
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "./api",
     "strict": true,
     "skipLibCheck": true,
-    "moduleResolution": "node"
+    "forceConsistentCasingInFileNames": true
   }
 }
