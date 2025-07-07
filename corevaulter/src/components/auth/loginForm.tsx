@@ -5,14 +5,13 @@ import { motion } from "framer-motion";
 
 export function LoginForm() {
   const { login, isLoading, error } = useAuthStore();
-
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     validateOnMount: false,
-
+    validateOnChange: false,
     validationSchema: loginSchema,
     onSubmit: async (values) => {
       await login(values.email, values.password);

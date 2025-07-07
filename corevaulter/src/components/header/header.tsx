@@ -28,11 +28,18 @@ export default function Header() {
           <a href="/contact" className="font-medium">
             Contact
           </a>
-          <button
-            onClick={() => navigate("/login")}
-            className="bg-white text-[#D71E28] border border-white px-4 py-2 rounded-full text-sm font-medium hover:bg-opacity-80 transition cursor-pointer">
-            Get Started
-          </button>
+          <div className="flex items-center gap-5">
+            <a
+              href="/login"
+              className="text-lg font-medium text-white hover:text-gray-200 transition">
+              Login
+            </a>
+            <button
+              onClick={() => navigate("/register")}
+              className="bg-white text-[#D71E28] border border-white px-4 py-2 rounded-full text-sm font-medium hover:bg-opacity-80 transition cursor-pointer">
+              Get Started
+            </button>
+          </div>
         </nav>
 
         {/* Mobile Menu Button */}

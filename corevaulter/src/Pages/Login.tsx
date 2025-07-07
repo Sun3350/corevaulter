@@ -26,7 +26,9 @@ export function LoginPage() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: 0.4 }}
           className="text-center flex flex-col justify-center items-center mb-8">
-          <img src="/Logo2.png" alt="Logo" className="w-[170px]" />
+          <a href="/">
+            <img src="/Logo2.png" alt="Logo" className="w-[170px]" />
+          </a>
           <p className="text-gray-600 mt-2">Sign in to your account</p>
         </motion.div>
 

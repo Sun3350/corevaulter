@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { registerSchema } from "../../api/schemas";
 import { useAuthStore } from "../../stores/auth.store";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 import React from "react";
 
@@ -26,6 +27,7 @@ export function RegisterForm() {
   const { register, isLoading, error } = useAuthStore();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -39,6 +41,7 @@ export function RegisterForm() {
     validationSchema: registerSchema,
     onSubmit: async (values) => {
       await register(values.name, values.email, values.password);
+      navigate("/login"); // or set a success state to show message
     },
   });
 

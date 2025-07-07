@@ -63,7 +63,7 @@ export default function HomePage() {
             intuitive dashboard.
           </p>
           <button
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("/register")}
             className="bg-[#D71E28] text-white font-semibold py-3 px-6 rounded-full hover:bg-[#bb1923] transition cursor-pointer">
             Get Started
           </button>
