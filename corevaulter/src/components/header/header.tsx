@@ -2,7 +2,7 @@ import { useState } from "react";
 import { HiMenu } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -29,11 +29,11 @@ export default function Header() {
             Contact
           </a>
           <div className="flex items-center gap-5">
-            <a
-              href="/login"
+            <Link
+              to="/login"
               className="text-lg font-medium text-white hover:text-gray-200 transition">
               Login
-            </a>
+            </Link>
             <button
               onClick={() => navigate("/register")}
               className="bg-white text-[#D71E28] border border-white px-4 py-2 rounded-full text-sm font-medium hover:bg-opacity-80 transition cursor-pointer">

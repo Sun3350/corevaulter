@@ -1,7 +1,7 @@
 import { RegisterForm } from "../components/auth/registerForm";
 import { useAuthStore } from "../stores/auth.store";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export function RegisterPage() {
@@ -41,11 +41,11 @@ export function RegisterPage() {
           className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             Already have an account?{" "}
-            <a
-              href="/login"
+            <Link
+              to="/login"
               className="font-medium text-[#D71E28] hover:text-red-700">
               Sign in here
-            </a>
+            </Link>
           </p>
         </motion.div>
       </motion.div>
