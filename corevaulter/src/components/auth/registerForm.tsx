@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFormik } from "formik";
 import { registerSchema } from "../../api/schemas";
 import { useAuthStore } from "../../stores/auth.store";
