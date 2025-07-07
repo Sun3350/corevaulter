@@ -17,9 +17,8 @@ export function RegisterPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold">
-            <span className="text-[#D71E28]">Core</span>Vault
-          </h1>
+          <img src="/Logo.png" alt="Logo" className="w-[150px]" />
+
           <p className="text-gray-600 mt-2">Create your account</p>
         </div>
 
