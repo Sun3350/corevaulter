@@ -34,6 +34,8 @@ export function RegisterForm() {
       password: "",
       confirmPassword: "",
     },
+    validateOnMount: false,
+    validateOnChange: false,
     validationSchema: registerSchema,
     onSubmit: async (values) => {
       await register(values.name, values.email, values.password);

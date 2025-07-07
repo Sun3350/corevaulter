@@ -62,12 +62,9 @@ export default function HomePage() {
             Securely store, invest, and grow your digital assets—all from one
             intuitive dashboard.
           </p>
-          <button className="bg-[#D71E28] text-white font-semibold py-3 px-6 rounded-full hover:bg-[#bb1923] transition">
-            Get Started
-          </button>
           <button
             onClick={() => navigate("/login")}
-            className="px-8 py-3 bg-[#D71E28] text-white rounded-lg hover:bg-red-700 transition-colors text-lg">
+            className="bg-[#D71E28] text-white font-semibold py-3 px-6 rounded-full hover:bg-[#bb1923] transition cursor-pointer">
             Get Started
           </button>
         </motion.div>

@@ -2,8 +2,10 @@ import { useState } from "react";
 import { HiMenu } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -26,7 +28,9 @@ export default function Header() {
           <a href="/contact" className="font-medium">
             Contact
           </a>
-          <button className="bg-white text-[#D71E28] border border-white px-4 py-2 rounded text-sm font-medium hover:bg-opacity-80 transition">
+          <button
+            onClick={() => navigate("/login")}
+            className="bg-white text-[#D71E28] border border-white px-4 py-2 rounded-full text-sm font-medium hover:bg-opacity-80 transition cursor-pointer">
             Get Started
           </button>
         </nav>

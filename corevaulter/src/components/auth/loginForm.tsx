@@ -11,6 +11,8 @@ export function LoginForm() {
       email: "",
       password: "",
     },
+    validateOnMount: false,
+
     validationSchema: loginSchema,
     onSubmit: async (values) => {
       await login(values.email, values.password);
@@ -99,7 +101,7 @@ export function LoginForm() {
         transition={{ delay: 0.3, duration: 0.4 }}>
         <button
           type="submit"
-          disabled={isLoading || !formik.isValid}
+          disabled={isLoading || !formik.dirty || !formik.isValid}
           className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#D71E28] hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D71E28] disabled:opacity-50 disabled:cursor-not-allowed">
           {isLoading ? "Signing in..." : "Sign in"}
         </button>

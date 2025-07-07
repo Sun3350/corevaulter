@@ -2,6 +2,7 @@ import { RegisterForm } from "../components/auth/registerForm";
 import { useAuthStore } from "../stores/auth.store";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export function RegisterPage() {
   const { isAuthenticated } = useAuthStore();
@@ -15,16 +16,27 @@ export function RegisterPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <div className="text-center mb-8">
-          <img src="/Logo.png" alt="Logo" className="w-[150px]" />
-
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2, duration: 0.4 }}
+          className="text-center flex flex-col justify-center items-center mb-8">
+          <img src="/Logo2.png" alt="Logo" className="w-[170px]" />
           <p className="text-gray-600 mt-2">Create your account</p>
-        </div>
+        </motion.div>
 
         <RegisterForm />
 
-        <div className="mt-6 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+          className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             Already have an account?{" "}
             <a
@@ -33,8 +45,8 @@ export function RegisterPage() {
               Sign in here
             </a>
           </p>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
