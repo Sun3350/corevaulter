@@ -15,7 +15,12 @@ type AuthState = {
   isLoading: boolean;
   error: string | null;
   login: (email: string, password: string) => Promise<void>;
-  register: (name: string, email: string, password: string) => Promise<void>;
+  register: (
+    name: string,
+    email: string,
+    password: string,
+    navigate: (path: string) => void
+  ) => Promise<void>;
   logout: () => void;
   loadUser: () => Promise<void>;
   resetState: () => void;
@@ -32,7 +37,7 @@ export const useAuthStore = create<AuthState>()(
 
       login: async (email, password) => {
         const state = get();
-        if (state.isLoading) return; // Prevent double loading
+        if (state.isLoading) return;
 
         set({ isLoading: true, error: null });
         try {
@@ -40,56 +45,59 @@ export const useAuthStore = create<AuthState>()(
           set({ user, token, isAuthenticated: true, isLoading: false });
         } catch (error) {
           set({ error: (error as Error).message, isLoading: false });
+          throw error; // Re-throw to handle in component
         }
       },
 
-      register: async (name, email, password) => {
+      register: async (name, email, password, navigate) => {
         const state = get();
         if (state.isLoading) return;
 
         set({ isLoading: true, error: null });
         try {
           await register(name, email, password);
-          // 👇 Don't set token or isAuthenticated here
           set({ isLoading: false });
+          // Navigate to login page after successful registration
+          navigate("/login");
         } catch (error) {
           set({ error: (error as Error).message, isLoading: false });
+          throw error; // Re-throw to handle in component
         }
       },
 
-      logout: () =>
+      logout: () => {
         set({
           user: null,
           token: null,
           isAuthenticated: false,
           error: null,
           isLoading: false,
-        }),
+        });
+      },
 
       loadUser: async () => {
-        const token = localStorage.getItem("auth-storage")
-          ? JSON.parse(localStorage.getItem("auth-storage")!).state.token
-          : null;
-
+        const token = get().token;
         if (!token) return;
 
         set({ isLoading: true });
         try {
           const user = await getCurrentUser(token);
-          set({ user, token, isAuthenticated: true, isLoading: false });
-        } catch {
+          set({ user, isAuthenticated: true, isLoading: false });
+        } catch (error) {
           set({ isAuthenticated: false, isLoading: false });
+          throw error;
         }
       },
-      // ✅ Add a reset helper to manually clear UI state
-      resetState: () =>
+
+      resetState: () => {
         set({
           user: null,
           token: null,
           isAuthenticated: false,
           error: null,
           isLoading: false,
-        }),
+        });
+      },
     }),
     {
       name: "auth-storage",

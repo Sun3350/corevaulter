@@ -95,11 +95,18 @@ export default function Header() {
                 onClick={() => setMenuOpen(false)}>
                 Contact
               </a>
-              <button
-                className="mt-4 bg-white text-[#D71E28] border border-white px-4 py-2 rounded text-sm font-medium hover:bg-opacity-80 transition"
-                onClick={() => setMenuOpen(false)}>
-                Get Started
-              </button>
+              <div className="flex w-full  gap-5 flex-col">
+                <Link
+                  to="/login"
+                  className="text-lg font-medium text-white hover:text-gray-200 transition">
+                  Login
+                </Link>
+                <button
+                  onClick={() => navigate("/register")}
+                  className="bg-white text-[#D71E28] border border-white px-4 py-2 rounded text-sm font-medium hover:bg-opacity-80 transition cursor-pointer">
+                  Get Started
+                </button>
+              </div>
             </nav>
           </motion.div>
         )}

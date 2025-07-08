@@ -40,8 +40,7 @@ export function RegisterForm() {
     validateOnChange: false,
     validationSchema: registerSchema,
     onSubmit: async (values) => {
-      await register(values.name, values.email, values.password);
-      navigate("/login"); // or set a success state to show message
+      await register(values.name, values.email, values.password, navigate);
     },
   });
 
