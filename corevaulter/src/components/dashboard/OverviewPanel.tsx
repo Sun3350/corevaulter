@@ -1,4 +1,8 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
 export function OverviewPanel() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const demoData = {
     totalBalance: 6300000,
     minWithdrawal: 100000,
@@ -9,6 +13,14 @@ export function OverviewPanel() {
       { id: 2, type: "Withdrawal", amount: 150000, date: "2023-06-10" },
       { id: 3, type: "Transfer", amount: 300000, date: "2023-06-05" },
     ],
+  };
+
+  const handleWithdrawClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -28,6 +40,11 @@ export function OverviewPanel() {
           <div className="mt-2 flex items-center text-green-600">
             <span>+2.3% this month</span>
           </div>
+          <button
+            onClick={handleWithdrawClick}
+            className="bg-[#D71E28] text-white mt-10 font-semibold py-2 px-5 rounded hover:bg-[#bb1923] transition-all duration-300 cursor-pointer text-sm group">
+            WITHDRAW
+          </button>
         </div>
 
         {/* Limits */}
@@ -81,6 +98,72 @@ export function OverviewPanel() {
           </div>
         </div>
       </div>
+
+      {/* Withdrawal Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+            onClick={closeModal}>
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-white rounded-lg shadow-xl max-w-md w-full p-6"
+              onClick={(e) => e.stopPropagation()}>
+              <div className="flex justify-between items-start mb-4">
+                <h3 className="text-xl font-bold text-[#D71E28]">
+                  Withdrawal Notice
+                </h3>
+                <button
+                  onClick={closeModal}
+                  className="text-gray-500 hover:text-gray-700">
+                  ✕
+                </button>
+              </div>
+              <div className="mb-6">
+                <p className="text-gray-700 mb-4">
+                  You can't make a withdrawal unless you pay 10% of the
+                  withdrawal limit which is $100,000.
+                </p>
+                <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                  <div className="flex">
+                    <div className="ml-3">
+                      <p className="text-sm text-yellow-700">
+                        Withdrawal fee:{" "}
+                        <span className="font-bold">
+                          $
+                          {(
+                            demoData.minWithdrawal * demoData.withdrawalFee
+                          ).toLocaleString()}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="flex justify-end space-x-3">
+                <button
+                  onClick={closeModal}
+                  className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                  Cancel
+                </button>
+                <button
+                  className="px-4 py-2 bg-[#D71E28] text-white rounded-md hover:bg-[#bb1923]"
+                  onClick={() => {
+                    // Add your withdrawal logic here
+                    closeModal();
+                  }}>
+                  Pay Fee & Withdraw
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

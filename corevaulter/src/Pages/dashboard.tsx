@@ -24,6 +24,9 @@ export function DashboardPage() {
 
   useEffect(() => {
     loadUser();
+    if (window.innerWidth < 768) {
+      setSidebarOpen(false);
+    }
   }, [loadUser]);
 
   if (!user) {

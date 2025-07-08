@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { login, register, getCurrentUser } from "../api/auth";
+import axios from "axios";
 
 type User = {
   id: string;
@@ -25,7 +26,30 @@ type AuthState = {
   loadUser: () => Promise<void>;
   resetState: () => void;
 };
+function parseAxiosError(error: unknown): string {
+  if (axios.isAxiosError(error)) {
+    const status = error.response?.status;
+    const backendMsg = error.response?.data?.message;
 
+    if (backendMsg) return backendMsg;
+
+    switch (status) {
+      case 400:
+        return "Invalid request. Please check your input.";
+      case 401:
+        return "Invalid credentials. Please try again.";
+      case 403:
+        return "Access denied. Unauthorized.";
+      case 404:
+        return "Resource not found.";
+      case 500:
+        return "Server error. Please try again later.";
+      default:
+        return "An unexpected error occurred.";
+    }
+  }
+  return "Something went wrong. Please try again.";
+}
 export const useAuthStore = create<AuthState>()(
   persist(
     (set, get) => ({
@@ -44,7 +68,8 @@ export const useAuthStore = create<AuthState>()(
           const { user, token } = await login(email, password);
           set({ user, token, isAuthenticated: true, isLoading: false });
         } catch (error) {
-          set({ error: (error as Error).message, isLoading: false });
+          const msg = parseAxiosError(error);
+          set({ error: msg, isLoading: false });
           throw error; // Re-throw to handle in component
         }
       },
@@ -60,7 +85,8 @@ export const useAuthStore = create<AuthState>()(
           // Navigate to login page after successful registration
           navigate("/login");
         } catch (error) {
-          set({ error: (error as Error).message, isLoading: false });
+          const msg = parseAxiosError(error);
+          set({ error: msg, isLoading: false });
           throw error; // Re-throw to handle in component
         }
       },
@@ -84,7 +110,8 @@ export const useAuthStore = create<AuthState>()(
           const user = await getCurrentUser(token);
           set({ user, isAuthenticated: true, isLoading: false });
         } catch (error) {
-          set({ isAuthenticated: false, isLoading: false });
+          const msg = parseAxiosError(error);
+          set({ error: msg, isLoading: false });
           throw error;
         }
       },
