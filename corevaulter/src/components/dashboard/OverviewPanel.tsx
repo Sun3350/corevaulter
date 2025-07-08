@@ -102,7 +102,7 @@ export function OverviewPanel() {
                       : "text-[#D71E28]"
                   }`}>
                   {activity.type === "Deposit" ? "+" : "-"}$
-                  {activity.amount.toLocaleString()}
+                  {activity.amount.toLocaleString()}.00
                 </p>
               </div>
             ))}
