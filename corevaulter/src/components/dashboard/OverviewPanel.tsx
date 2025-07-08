@@ -23,7 +23,7 @@ export function OverviewPanel() {
         <div className="p-4 bg-white rounded-lg border-l-4 border-[#D71E28] shadow-sm">
           <h3 className="text-lg font-medium text-gray-500">Total Balance</h3>
           <h2 className="mt-2 text-3xl font-bold">
-            ${(demoData.totalBalance / 1000000).toFixed(1)}M
+            ${demoData.totalBalance.toLocaleString()}
           </h2>
           <div className="mt-2 flex items-center text-green-600">
             <span>+2.3% this month</span>
