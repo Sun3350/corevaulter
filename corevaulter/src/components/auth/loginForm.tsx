@@ -2,9 +2,13 @@ import { useFormik } from "formik";
 import { loginSchema } from "../../api/schemas";
 import { useAuthStore } from "../../stores/auth.store";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 export function LoginForm() {
   const { login, isLoading, error } = useAuthStore();
+  const [showPassword, setShowPassword] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -71,19 +75,31 @@ export function LoginForm() {
           className="block text-sm font-medium text-gray-700">
           Password
         </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          className={`mt-1 block w-full px-3 py-2 border ${
-            formik.touched.password && formik.errors.password
-              ? "border-red-500"
-              : "border-gray-300"
-          } rounded-md shadow-sm focus:outline-none focus:ring-[#D71E28] focus:border-[#D71E28]`}
-        />
+        <div className="relative mt-1">
+          <input
+            id="password"
+            name="password"
+            type={showPassword ? "text" : "password"}
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            className={`block w-full px-3 py-2 border ${
+              formik.touched.password && formik.errors.password
+                ? "border-red-500"
+                : "border-gray-300"
+            } rounded-md shadow-sm focus:outline-none focus:ring-[#D71E28] focus:border-[#D71E28]`}
+          />
+          <button
+            type="button"
+            className="absolute inset-y-0 right-0 pr-3 flex items-center"
+            onClick={() => setShowPassword(!showPassword)}>
+            {showPassword ? (
+              <EyeSlashIcon className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+            ) : (
+              <EyeIcon className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+            )}
+          </button>
+        </div>
         {formik.touched.password && formik.errors.password && (
           <motion.p
             initial={{ opacity: 0 }}
