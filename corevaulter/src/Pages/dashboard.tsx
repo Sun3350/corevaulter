@@ -14,8 +14,6 @@ import {
   FiUsers,
   FiFileText,
   FiLogOut,
-  FiArrowLeft,
-  FiArrowRight,
   FiChevronLeft,
   FiChevronRight,
 } from "react-icons/fi";
