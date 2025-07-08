@@ -2,12 +2,12 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function OverviewPanel() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const demoData = {
     totalBalance: 6300000,
     minWithdrawal: 100000,
     withdrawalFee: 0.1,
     dailyTransferLimit: 500000,
+
     recentActivity: [
       { id: 1, type: "Deposit", amount: 250000, date: "2023-06-15" },
       { id: 2, type: "Withdrawal", amount: 150000, date: "2023-06-10" },
@@ -16,11 +16,22 @@ export function OverviewPanel() {
   };
 
   const handleWithdrawClick = () => {
-    setIsModalOpen(true);
+    setIsWithdrawModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const [isWithdrawModalOpen, setIsWithdrawModalOpen] = useState(false);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<
+    string | null
+  >(null);
+
+  const paymentMethods = [
+    { id: "zelle", name: "Zelle", icon: "🏦" },
+    { id: "paypal", name: "PayPal", icon: "🔵" },
+    { id: "bank", name: "Bank Transfer", icon: "💳" },
+  ];
+
+  const calculateFee = () => {
+    return demoData.minWithdrawal * demoData.withdrawalFee;
   };
 
   return (
@@ -101,13 +112,13 @@ export function OverviewPanel() {
 
       {/* Withdrawal Modal */}
       <AnimatePresence>
-        {isModalOpen && (
+        {isWithdrawModalOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-            onClick={closeModal}>
+            onClick={() => setIsWithdrawModalOpen(false)}>
             <motion.div
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
@@ -116,46 +127,77 @@ export function OverviewPanel() {
               onClick={(e) => e.stopPropagation()}>
               <div className="flex justify-between items-start mb-4">
                 <h3 className="text-xl font-bold text-[#D71E28]">
-                  Withdrawal Notice
+                  Withdraw Funds from CoreVaulter
                 </h3>
                 <button
-                  onClick={closeModal}
-                  className="text-gray-500 hover:text-gray-700">
+                  onClick={() => setIsWithdrawModalOpen(false)}
+                  className="text-gray-500 hover:text-gray-700 text-xl">
                   ✕
                 </button>
               </div>
-              <div className="mb-6">
-                <p className="text-gray-700 mb-4">
-                  You can't make a withdrawal unless you pay 10% of the
-                  withdrawal limit which is $100,000.
+
+              <div className="mb-6 space-y-4">
+                <p className="text-gray-700">
+                  To proceed with your withdrawal, please note:
                 </p>
-                <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
-                  <div className="flex">
-                    <div className="ml-3">
-                      <p className="text-sm text-yellow-700">
-                        Withdrawal fee:{" "}
-                        <span className="font-bold">
-                          $
-                          {(
-                            demoData.minWithdrawal * demoData.withdrawalFee
-                          ).toLocaleString()}
-                        </span>
-                      </p>
-                    </div>
-                  </div>
+
+                <ul className="list-disc pl-5 space-y-2 text-gray-700">
+                  <li>
+                    Minimum withdrawal amount: ₦
+                    {demoData.minWithdrawal.toLocaleString()}
+                  </li>
+                  <li>
+                    A 10% processing fee is required before withdrawal:
+                    <span className="font-bold ml-1">
+                      ₦{calculateFee().toLocaleString()}
+                    </span>
+                  </li>
+                  <li>Payment can be made via:</li>
+                </ul>
+
+                <div className="grid grid-cols-3 gap-3 mt-2">
+                  {paymentMethods.map((method) => (
+                    <button
+                      key={method.id}
+                      onClick={() => setSelectedPaymentMethod(method.id)}
+                      className={`p-3 border rounded-lg flex flex-col items-center ${
+                        selectedPaymentMethod === method.id
+                          ? "border-[#D71E28] bg-red-50"
+                          : "border-gray-200 hover:border-gray-300"
+                      }`}>
+                      <span className="text-2xl mb-1">{method.icon}</span>
+                      <span className="text-sm">{method.name}</span>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mt-4">
+                  <p className="text-sm text-blue-700">
+                    Once your fee is confirmed, your withdrawal will be
+                    processed immediately.
+                  </p>
                 </div>
               </div>
+
               <div className="flex justify-end space-x-3">
                 <button
-                  onClick={closeModal}
+                  onClick={() => setIsWithdrawModalOpen(false)}
                   className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
                   Cancel
                 </button>
                 <button
-                  className="px-4 py-2 bg-[#D71E28] text-white rounded-md hover:bg-[#bb1923]"
+                  className={`px-4 py-2 bg-[#D71E28] text-white rounded-md ${
+                    !selectedPaymentMethod
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:bg-[#bb1923]"
+                  }`}
+                  disabled={!selectedPaymentMethod}
                   onClick={() => {
-                    // Add your withdrawal logic here
-                    closeModal();
+                    // Handle payment submission here
+                    console.log(
+                      `Processing payment via ${selectedPaymentMethod}`
+                    );
+                    setIsWithdrawModalOpen(false);
                   }}>
                   Pay Fee & Withdraw
                 </button>
