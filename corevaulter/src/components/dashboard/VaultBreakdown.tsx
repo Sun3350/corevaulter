@@ -41,7 +41,7 @@ export function VaultBreakdown() {
               </Pie>
               <Tooltip
                 formatter={(value) => [
-                  `$${(Number(value) / 1000000).toFixed(2)}M`,
+                  `$${Number(value).toLocaleString()}.00`,
                   "Value",
                 ]}
               />
@@ -60,7 +60,7 @@ export function VaultBreakdown() {
                 <span>{vault.name}</span>
               </div>
               <span className="font-medium">
-                ${(vault.value / 1000000).toFixed(2)}M
+                ${vault.value.toLocaleString()}.00
               </span>
             </div>
           ))}

@@ -79,7 +79,7 @@ export function ActivityLog() {
                       : "text-[#D71E28]"
                   }`}>
                   {activity.type === "Deposit" ? "+" : "-"}$
-                  {activity.amount.toLocaleString()}
+                  {activity.amount.toLocaleString()}.00
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {activity.type === "Transfer"

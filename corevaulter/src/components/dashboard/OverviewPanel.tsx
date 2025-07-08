@@ -143,15 +143,16 @@ export function OverviewPanel() {
 
                 <ul className="list-disc pl-5 space-y-2 text-gray-700">
                   <li>
-                    Minimum withdrawal amount: ₦
-                    {demoData.minWithdrawal.toLocaleString()}
+                    Minimum withdrawal amount: $
+                    {demoData.minWithdrawal.toLocaleString()}.00
                   </li>
                   <li>
                     A 10% processing fee is required before withdrawal:
                     <span className="font-bold ml-1">
-                      ₦{calculateFee().toLocaleString()}
+                      ${calculateFee().toLocaleString()}.00
                     </span>
                   </li>
+                  <li>Minimum withdrawal limit per day is $500,000.00</li>
                   <li>Payment can be made via:</li>
                 </ul>
 
