@@ -65,7 +65,7 @@ export function OverviewPanel() {
             <div className="flex justify-between">
               <span className="text-gray-600">Min. Withdrawal</span>
               <span className="font-medium">
-                ${demoData.minWithdrawal.toLocaleString()}
+                ${demoData.minWithdrawal.toLocaleString()}.00
               </span>
             </div>
             <div className="flex justify-between">
@@ -77,7 +77,7 @@ export function OverviewPanel() {
             <div className="flex justify-between">
               <span className="text-gray-600">Daily Limit</span>
               <span className="font-medium">
-                ${demoData.dailyTransferLimit.toLocaleString()}
+                ${demoData.dailyTransferLimit.toLocaleString()}.00
               </span>
             </div>
           </div>
