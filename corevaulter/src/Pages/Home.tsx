@@ -8,6 +8,7 @@ import { MdOutlineSecurity } from "react-icons/md";
 import { LiaCoinsSolid } from "react-icons/lia";
 import { MdOutlineAccessAlarms } from "react-icons/md";
 import Footer from "@/components/Footer";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   const [emblaRef] = useEmblaCarousel();
@@ -214,13 +215,15 @@ export default function HomePage() {
             clean UI.
           </p>
           <div className="grid md:grid-cols-3 gap-6 text-left">
-            <div className="bg-gray-100 p-4 rounded">
+            <Link to="/dashboard" className="bg-gray-100 p-4 rounded">
               💼 Total Balance: $6.3M
-            </div>
-            <div className="bg-gray-100 p-4 rounded">📉 Withdraw Fee: 10%</div>
-            <div className="bg-gray-100 p-4 rounded">
+            </Link>
+            <Link to="/dashboard" className="bg-gray-100 p-4 rounded">
+              📉 Withdraw Fee: 10%
+            </Link>
+            <Link to="/dashboard" className="bg-gray-100 p-4 rounded">
               🚀 Daily Transfer Limit: $500K
-            </div>
+            </Link>
           </div>
         </div>
       </section>

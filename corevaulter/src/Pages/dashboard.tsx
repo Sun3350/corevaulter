@@ -5,7 +5,7 @@ import { AssetInsight } from "../components/dashboard/AssetInsight";
 import { ActivityLog } from "../components/dashboard/ActivityLog";
 import { useAuthStore } from "../stores/auth.store";
 import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {
   FiHome,
   FiPieChart,
@@ -43,9 +43,15 @@ export function DashboardPage() {
         }`}>
         <div className="p-4 flex items-center justify-between border-b">
           {sidebarOpen ? (
-            <img src="/Logo2.png" alt="Logo" className="w-32" />
+            <Link to="/">
+              {" "}
+              <img src="/Logo2.png" alt="Logo" className="w-32" />
+            </Link>
           ) : (
-            <img src="/icon.PNG" alt="Logo" className="w-5" />
+            <Link to="/">
+              {" "}
+              <img src="/icon.PNG" alt="Logo" className="w-5" />
+            </Link>
           )}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
