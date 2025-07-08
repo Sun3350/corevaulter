@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuthStore } from "@/stores/auth.store";
 
 export function OverviewPanel() {
   const demoData = {
@@ -33,6 +34,18 @@ export function OverviewPanel() {
   const calculateFee = () => {
     return demoData.minWithdrawal * demoData.withdrawalFee;
   };
+  const { user, loadUser } = useAuthStore();
+
+  useEffect(() => {
+    loadUser();
+  }, [loadUser]);
+  if (!user) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -44,6 +57,9 @@ export function OverviewPanel() {
       <div className="px-6 py-4 grid grid-cols-1 gap-6 md:grid-cols-3">
         {/* Total Balance */}
         <div className="p-4 bg-white rounded-lg border-l-4 border-[#D71E28] shadow-sm">
+          <h3 className="text-[#D71E28] text-2xl font-semibold mb-3">
+            {user.name}
+          </h3>
           <h3 className="text-lg font-medium text-gray-500">Total Balance</h3>
           <h2 className="mt-2 text-3xl font-bold">
             ${demoData.totalBalance.toLocaleString()}.00
