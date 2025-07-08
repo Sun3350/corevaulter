@@ -16,6 +16,8 @@ import {
   FiLogOut,
   FiArrowLeft,
   FiArrowRight,
+  FiChevronLeft,
+  FiChevronRight,
 } from "react-icons/fi";
 
 export function DashboardPage() {
@@ -58,8 +60,8 @@ export function DashboardPage() {
           )}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-1 rounded-lg hover:bg-gray-100">
-            {sidebarOpen ? <FiArrowLeft /> : <FiArrowRight />}
+            className="p-1 rounded-lg hover:bg-gray-100 text-2xl">
+            {sidebarOpen ? <FiChevronLeft /> : <FiChevronRight />}
           </button>
         </div>
 
