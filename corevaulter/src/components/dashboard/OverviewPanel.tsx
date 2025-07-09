@@ -57,10 +57,10 @@ export function OverviewPanel() {
       <div className="px-6 py-4 grid grid-cols-1 gap-6 md:grid-cols-3">
         {/* Total Balance */}
         <div className="p-4 bg-white rounded-lg border-l-4 border-[#D71E28] shadow-sm">
-          <h3 className="text-green-600 text-2xl font-semibold mb-3">
+          <h3 className="text-green-600 text-2xl font-semibold mb-1">
             {user.name}
           </h3>
-          <p className="text-xs text-gray-600">@{user.username}</p>
+          <p className="text-xs text-gray-600 mb-1">@{user.username}</p>
           <h3 className="text-lg font-medium text-gray-500">Total Balance</h3>
           <h2 className="mt-2 text-3xl font-bold">
             ${demoData.totalBalance.toLocaleString()}.00
