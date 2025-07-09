@@ -7,6 +7,7 @@ type User = {
   id: string;
   name: string;
   email: string;
+  username: string;
 };
 
 type AuthState = {
@@ -15,10 +16,11 @@ type AuthState = {
   isAuthenticated: boolean;
   isLoading: boolean;
   error: string | null;
-  login: (email: string, password: string) => Promise<void>;
+  login: (username: string, password: string) => Promise<void>;
   register: (
     name: string,
     email: string,
+    username: string,
     password: string,
     navigate: (path: string) => void
   ) => Promise<void>;
@@ -59,13 +61,13 @@ export const useAuthStore = create<AuthState>()(
       isLoading: false,
       error: null,
 
-      login: async (email, password) => {
+      login: async (username, password) => {
         const state = get();
         if (state.isLoading) return;
 
         set({ isLoading: true, error: null });
         try {
-          const { user, token } = await login(email, password);
+          const { user, token } = await login(username, password);
           set({ user, token, isAuthenticated: true, isLoading: false });
         } catch (error) {
           const msg = parseAxiosError(error);
@@ -74,13 +76,13 @@ export const useAuthStore = create<AuthState>()(
         }
       },
 
-      register: async (name, email, password, navigate) => {
+      register: async (name, email, username, password, navigate) => {
         const state = get();
         if (state.isLoading) return;
 
         set({ isLoading: true, error: null });
         try {
-          await register(name, email, password);
+          await register(name, email, username, password);
           set({ isLoading: false });
           // Navigate to login page after successful registration
           navigate("/login");

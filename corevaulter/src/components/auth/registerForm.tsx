@@ -32,6 +32,7 @@ export function RegisterForm() {
   const formik = useFormik({
     initialValues: {
       name: "",
+      username: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -40,7 +41,7 @@ export function RegisterForm() {
     validateOnChange: false,
     validationSchema: registerSchema,
     onSubmit: async (values) => {
-      await register(values.name, values.email, values.password, navigate);
+      await register(values.name, values.username, values.email, values.password, navigate);
     },
   });
 
@@ -80,6 +81,34 @@ export function RegisterForm() {
             animate={{ opacity: 1 }}
             className="mt-1 text-sm text-red-600">
             {formik.errors.name}
+          </motion.p>
+        )}
+      </FadeIn>
+      <FadeIn>
+        <label
+          htmlFor="username"
+          className="block text-sm font-medium text-gray-700">
+          Username
+        </label>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          value={formik.values.username}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          className={`mt-1 block w-full px-3 py-2 border ${
+            formik.touched.username && formik.errors.username
+              ? "border-red-500"
+              : "border-gray-300"
+          } rounded-md shadow-sm focus:outline-none focus:ring-[#D71E28] focus:border-[#D71E28] transition-all duration-200`}
+        />
+        {formik.touched.username && formik.errors.username && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="mt-1 text-sm text-red-600">
+            {formik.errors.username}
           </motion.p>
         )}
       </FadeIn>

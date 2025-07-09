@@ -2,9 +2,9 @@ import axios from "axios";
 
 const API_BASE_URL = "https://corevaulter-server-6iz8.vercel.app/api";
 
-export const login = async (email: string, password: string) => {
+export const login = async (username: string, password: string) => {
   const response = await axios.post(`${API_BASE_URL}/auth/login`, {
-    email,
+    username,
     password,
   });
   return response.data;
@@ -13,11 +13,13 @@ export const login = async (email: string, password: string) => {
 export const register = async (
   name: string,
   email: string,
+  username:string,
   password: string
 ) => {
   const response = await axios.post(`${API_BASE_URL}/auth/register`, {
     name,
     email,
+    username,
     password,
   });
   return response.data;

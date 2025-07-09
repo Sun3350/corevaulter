@@ -11,14 +11,14 @@ export function LoginForm() {
 
   const formik = useFormik({
     initialValues: {
-      email: "",
+      username: "",
       password: "",
     },
     validateOnMount: false,
     validateOnChange: false,
     validationSchema: loginSchema,
     onSubmit: async (values) => {
-      await login(values.email, values.password);
+      await login(values.username, values.password);
     },
   });
 
@@ -39,29 +39,29 @@ export function LoginForm() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, duration: 0.4 }}>
         <label
-          htmlFor="email"
+          htmlFor="username"
           className="block text-sm font-medium text-gray-700">
-          Email address
+          username address
         </label>
         <input
-          id="email"
-          name="email"
-          type="email"
-          value={formik.values.email}
+          id="username"
+          name="username"
+          type="text"
+          value={formik.values.username}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           className={`mt-1 block w-full px-3 py-2 border ${
-            formik.touched.email && formik.errors.email
+            formik.touched.username && formik.errors.username
               ? "border-red-500"
               : "border-gray-300"
           } rounded-md shadow-sm focus:outline-none focus:ring-[#D71E28] focus:border-[#D71E28]`}
         />
-        {formik.touched.email && formik.errors.email && (
+        {formik.touched.username && formik.errors.username && (
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="mt-1 text-sm text-red-600">
-            {formik.errors.email}
+            {formik.errors.username}
           </motion.p>
         )}
       </motion.div>
