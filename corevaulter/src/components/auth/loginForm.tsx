@@ -41,7 +41,7 @@ export function LoginForm() {
         <label
           htmlFor="username"
           className="block text-sm font-medium text-gray-700">
-          username address
+          Username
         </label>
         <input
           id="username"
