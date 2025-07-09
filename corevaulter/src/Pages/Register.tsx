@@ -1,19 +1,9 @@
 import { RegisterForm } from "../components/auth/registerForm";
-import { useAuthStore } from "../stores/auth.store";
-import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export function RegisterPage() {
-  const { isAuthenticated } = useAuthStore();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/dashboard");
-    }
-  }, [isAuthenticated, navigate]);
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <motion.div

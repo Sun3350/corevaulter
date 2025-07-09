@@ -6,8 +6,8 @@ import axios from "axios";
 type User = {
   id: string;
   name: string;
-  email: string;
   username: string;
+  email: string;
 };
 
 type AuthState = {
@@ -19,8 +19,8 @@ type AuthState = {
   login: (username: string, password: string) => Promise<void>;
   register: (
     name: string,
-    email: string,
     username: string,
+    email: string,
     password: string,
     navigate: (path: string) => void
   ) => Promise<void>;
@@ -76,13 +76,13 @@ export const useAuthStore = create<AuthState>()(
         }
       },
 
-      register: async (name, email, username, password, navigate) => {
+      register: async (name, username, email, password, navigate) => {
         const state = get();
         if (state.isLoading) return;
 
         set({ isLoading: true, error: null });
         try {
-          await register(name, email, username, password);
+          await register(name, username, email, password);
           set({ isLoading: false });
           // Navigate to login page after successful registration
           navigate("/login");
