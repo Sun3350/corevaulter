@@ -207,30 +207,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <section id="dashboard" className="py-16 px-6 bg-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">Dashboard Snapshot</h2>
-          <p className="text-gray-600 mb-6">
-            View your balance, track performance, and see detailed logs with a
-            clean UI.
-          </p>
-          <div className="grid md:grid-cols-3 gap-6 text-left">
-            <Link to="/dashboard" className="bg-gray-100 p-4 rounded">
-              💼 Total Balance: $6.3M
-            </Link>
-            <Link to="/dashboard" className="bg-gray-100 p-4 rounded">
-              📉 Withdraw Fee: 10%
-            </Link>
-            <Link to="/dashboard" className="bg-gray-100 p-4 rounded">
-              🚀 Daily Transfer Limit: $500K
-            </Link>
-          </div>
-        </div>
-      </section>
-      {/* New Customer Offer Section */}
+
       <section className="py-16 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
-          {/* New Customer Banner */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
