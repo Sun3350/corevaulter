@@ -8,7 +8,6 @@ import { MdOutlineSecurity } from "react-icons/md";
 import { LiaCoinsSolid } from "react-icons/lia";
 import { MdOutlineAccessAlarms } from "react-icons/md";
 import Footer from "@/components/Footer";
-import { Link } from "react-router-dom";
 
 export default function HomePage() {
   const [emblaRef] = useEmblaCarousel();
